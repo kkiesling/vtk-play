@@ -24,7 +24,7 @@ def main():
     deci.SetInputConnection(pdport)
 
     # set decimate options
-    target = 0.5
+    target = 0.9
     deci.SetTargetReduction(target)  # target reduction
     deci.SetPreserveTopology(True)  # preserve topology (splitting or hole elimination not allowed)
     deci.SetSplitting(False)  # no mesh splitting allowed
@@ -40,7 +40,7 @@ def main():
     usg_new.ShallowCopy(appendfilter.GetOutput())
 
     # write file (USG) - needed for pymoab
-    outfile = './decimate-out-usg.vtk'
+    outfile = fname.split('.')[0] + '-decimate-out-usg.vtk'
     writer1 = vtk.vtkGenericDataObjectWriter()
     writer1.SetFileName(outfile)
     writer1.SetInputData(usg_new)
@@ -48,7 +48,7 @@ def main():
     writer1.Write()
 
     # write out polydata too
-    outpoly = './decimate-out-poly.vtk'
+    outpoly = fname.split('.')[0] + '-decimate-out-poly.vtk'
     writer2 = vtk.vtkGenericDataObjectWriter()
     writer2.SetFileName(outpoly)
     writer2.SetInputConnection(deciport)
