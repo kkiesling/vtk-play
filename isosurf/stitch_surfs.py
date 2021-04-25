@@ -161,15 +161,21 @@ def separate_surfs():
             all_verts = mb.get_entities_by_type(fs, types.MBVERTEX)
 
 
-# def stitch_isosurfs():
-#     isosurfs =
-#     for i in isosurfs.keys():
+def stitch_isosurfs():
+    iso_ids = sorted(isosurfs.keys())
+    # compare only to the next highest one (don't need to do last isosurf)
+    for i in iso_ids[:-1]:
+        ext_curves_1 = isosurfs[i]['surf_curves']
+        ext_curves_2 = isosurfs[i + 1]['surf_curves']
+
+        print(ext_curves_1)
+        print(ext_curves_2)
+
 
 
 if __name__ == '__main__':
     read_files()
     separate_surfs()
     get_surf_curves()
-    print(isosurfs)
-
+    stitch_isosurfs()
     # try to create triangles on surf extents
